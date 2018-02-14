@@ -23,10 +23,11 @@ body {
 
 main {
   flex-grow: 1;
+  background-color:#E9E9EF
 }
 
 /* Margins */
 
 header, main {
-  margin: 8px;
+  padding: 8px;
 }
