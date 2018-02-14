@@ -1,7 +1,11 @@
 import React from 'react';
 
+import './about-us.css';
+
 const AboutUs = () => (
-  <button id="about--us-button">About Us</button>
+  <footer>
+    <button id="about-us-button">About Us</button>
+  </footer>
 );
 
 export default AboutUs;

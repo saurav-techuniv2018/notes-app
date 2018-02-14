@@ -15,9 +15,7 @@ const App = () =>
       <main >
         <NewNote />
       </main>
-      <footer>
-        <AboutUs />
-      </footer>
+      <AboutUs />
     </div>
   );
 

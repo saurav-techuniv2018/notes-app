@@ -1,0 +1,8 @@
+footer {
+  display: flex;
+}
+
+#about-us-button{
+ text-align: center;
+ flex-grow: 1;
+}
