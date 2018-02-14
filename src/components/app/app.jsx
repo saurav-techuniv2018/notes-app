@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Title from './components/title';
-import NewNote from './components/new-note';
-import AboutUs from './components/about-us';
+import Title from '../title/title';
+import NewNote from '../new-note/new-note';
+import AboutUs from '../about-us/about-us';
 
-import './App.css';
+import './app.css';
 
 const App = () =>
   (
