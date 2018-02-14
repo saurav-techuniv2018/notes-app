@@ -14,6 +14,11 @@ class NewNote extends React.Component {
 
   onNoteTextChanged(e) {
     this.note = e.target.value;
+
+    if (this.note.length >= 120) {
+      this.note = this.note.slice(0, 120);
+    }
+
     this.setState({
       limitReaching: this.note.length >= 120,
     });
@@ -42,7 +47,7 @@ class NewNote extends React.Component {
         />
         <section className="action-section">
           <button id="save-button">Save</button>
-          <p>150 characters</p>
+          <p>{`${120 - this.note.length} characters`}</p>
         </section>
 
       </article>
