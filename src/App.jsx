@@ -4,6 +4,8 @@ import Title from './components/title';
 import NewNote from './components/new-note';
 import AboutUs from './components/about-us';
 
+import './App.css';
+
 const App = () =>
   (
     <div className="App">
