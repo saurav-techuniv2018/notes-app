@@ -1,15 +1,15 @@
-footer {
+.AboutUs-container {
   display: flex;
 }
 
-#about-us-button{
- text-align: center;
- flex-grow: 1;
- font-size: 1em;
- font-family: 'Helvetica Neue',Georgia, 'Times New Roman', Times, serif;
- padding: 16px;
- border-radius: 0;  
- border: none;
- background-color: white;
- font-weight: bold;
+.AboutUs-button {
+  text-align: center;
+  flex-grow: 1;
+  font-size: 1em;
+  font-family: 'Helvetica Neue', Georgia, 'Times New Roman', Times, serif;
+  padding: 16px;
+  border-radius: 0;
+  border: none;
+  background-color: white;
+  font-weight: bold;
 }
