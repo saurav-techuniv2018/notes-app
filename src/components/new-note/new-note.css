@@ -90,3 +90,7 @@ h2 {
 #new-note-heading {
   display: flex;
 }
+
+textarea {
+  margin-bottom: 4px;
+}
