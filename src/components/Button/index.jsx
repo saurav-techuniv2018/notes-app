@@ -18,7 +18,6 @@ class Button extends React.Component {
 
   render = () => (
     <button
-      id="save-button"
       onClick={args => this.props.onClick(args)}
     >
       {this.props.label}
