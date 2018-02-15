@@ -1,5 +1,6 @@
 {
   "name": "notes-app",
+  "homepage": "https://saurav-techuniv2018.github.io/notes-app/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
