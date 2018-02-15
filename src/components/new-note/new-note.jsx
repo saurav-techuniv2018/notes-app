@@ -1,53 +1,70 @@
+import { PropTypes } from 'prop-types';
 import React from 'react';
 
+import MaterialIcon from '../material-icon/material-icon';
+
 import './new-note.css';
+import RemainingCharacters from '../remaining-characters/remaining-characters';
 
 class NewNote extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      limitReaching: false,
+    NewNote.propTypes = {
+      title: PropTypes.string.isRequired,
+      noteTitlePlaceholder: PropTypes.string.isRequired,
+      newNoteIcon: PropTypes.string.isRequired,
+      charactersLimit: PropTypes.string.isRequired,
     };
-    this.note = '';
+
+    this.state = {
+      note: '',
+      limitReaching: false,
+      charactersLimit: this.props.charactersLimit,
+    };
   }
 
   onNoteTextChanged(e) {
-    this.note = e.target.value;
-
-    if (this.note.length >= 120) {
-      this.note = this.note.slice(0, 120);
-    }
+    const newNote = e.target.value;
 
     this.setState({
-      limitReaching: this.note.length >= 120,
+      note: newNote,
+      limitReaching: newNote.length >= this.state.charactersLimit,
     });
   }
 
   render() {
     return (
       <article>
-        <section className="title-section">
-          <h2 id="new-note-title">Note Title</h2>
-          <button id="language" >en</button>
+        <section id="new-note-heading">
+          <h2 id="new-note-title">{this.props.title}</h2>
+          <button id="language">en</button>
         </section>
 
-        <input type="text" id="note-title-input" placeholder="Tasks for today" />
+        <input
+          type="text"
+          id="note-title-input"
+          placeholder={this.props.noteTitlePlaceholder}
+        />
 
         <section className="note-heading">
           <h3>Please type your note below</h3>
-          <span><i className="material-icons">&#xE14F;</i></span>
+          <MaterialIcon icon={this.props.newNoteIcon} />
         </section>
 
         <textarea
           id="notes"
           value={this.note}
+          maxLength={this.state.charactersLimit}
           className={this.state.limitReaching ? 'textarea-warning' : ''}
           onChange={e => this.onNoteTextChanged(e)}
         />
         <section className="action-section">
           <button id="save-button">Save</button>
-          <p>{`${120 - this.note.length} characters`}</p>
+          <RemainingCharacters
+            count={this.state.charactersLimit - this.state.note.length}
+            itemLabel="characters"
+          />
         </section>
 
       </article>

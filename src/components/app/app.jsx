@@ -10,10 +10,15 @@ const App = () =>
   (
     <div className="App">
       <header>
-        <Title />
+        <Title value="Start taking notes" />
       </header>
       <main >
-        <NewNote />
+        <NewNote
+          title="Note Title"
+          noteTitlePlaceholder="Tasks for today"
+          newNoteIcon="&#xE14F;"
+          charactersLimit={10}
+        />
       </main>
       <AboutUs />
     </div>
