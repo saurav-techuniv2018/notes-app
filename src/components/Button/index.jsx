@@ -1,6 +1,8 @@
 import { PropTypes } from 'prop-types';
 import React from 'react';
 
+import './Button.css';
+
 class Button extends React.Component {
   constructor(props) {
     super(props);
@@ -18,6 +20,7 @@ class Button extends React.Component {
 
   render = () => (
     <button
+      className="NewNote-button"
       onClick={args => this.props.onClick(args)}
     >
       {this.props.label}

@@ -1,6 +1,8 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
+import './MaterialIcon.css';
+
 class MaterialIcon extends React.Component {
   constructor(props) {
     super(props);
@@ -12,7 +14,9 @@ class MaterialIcon extends React.Component {
 
   render() {
     return (
-      <span><i className="material-icons">{this.props.icon}</i></span>
+      <span className="MaterialIcon-container">
+        <i className="material-icons">{this.props.icon}</i>
+      </span>
     );
   }
 }

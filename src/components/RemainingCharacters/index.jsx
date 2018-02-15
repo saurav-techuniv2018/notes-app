@@ -1,6 +1,8 @@
 import { PropTypes } from 'prop-types';
 import React from 'react';
 
+import './RemainingCharacters.css';
+
 class RemainingCharacters extends React.Component {
   constructor(props) {
     super(props);
@@ -13,7 +15,7 @@ class RemainingCharacters extends React.Component {
 
   render() {
     return (
-      <p>{`${this.props.count} ${this.props.itemLabel}`}</p>
+      <p className="RemainingCharacters">{`${this.props.count} ${this.props.itemLabel}`}</p>
     );
   }
 }

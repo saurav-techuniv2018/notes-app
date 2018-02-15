@@ -30,18 +30,17 @@ class NewNote extends React.Component {
 
   render() {
     return (
-      <article>
-        <section id="new-note-heading">
-          <h2 id="new-note-title">{this.props.title}</h2>
+      <article className="NewNote-container">
+        <section className="NewNote-heading">
+          <h2 className="NewNote-title">{this.props.title}</h2>
           <Button
-            id="language"
+            class="NewNote-button"
             label="en"
           />
         </section>
-
         <input
           type="text"
-          id="note-title-input"
+          className="NewNote-title-input"
           placeholder={this.props.noteTitlePlaceholder}
           value={this.state.noteTitle}
           onChange={(e) => {
@@ -52,17 +51,14 @@ class NewNote extends React.Component {
             });
           }}
         />
-
-        <section className="note-heading">
-          <h3>{this.props.noteHint}</h3>
+        <section className="NewNote-note-heading">
+          <h3 className="NewNote-note-hint">{this.props.noteHint}</h3>
           <MaterialIcon icon={this.props.newNoteIcon} />
         </section>
-
         <textarea
-          id="notes"
           value={this.state.note}
           maxLength={this.state.charactersLimit}
-          className={this.state.limitReaching ? 'textarea-warning' : ''}
+          className={`NewNote-notes ${this.state.limitReaching ? 'NewNote-textarea-warning' : ''}`}
           onChange={(e) => {
             const newNote = e.target.value;
 
@@ -72,8 +68,9 @@ class NewNote extends React.Component {
             });
           }}
         />
-        <section className="action-section">
+        <section className="NewNote-action-section">
           <Button
+            className="NewNote-button"
             label="Save"
             onClick={() => {
               this.props.onSave({
@@ -92,7 +89,6 @@ class NewNote extends React.Component {
             itemLabel="characters"
           />
         </section>
-
       </article>
     );
   }
