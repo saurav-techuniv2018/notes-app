@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Title from '../title/title';
-import NewNote from '../new-note/new-note';
-import AboutUs from '../about-us/about-us';
+import Title from '../Title';
+import NewNote from '../NewNote';
+import AboutUs from '../AboutUs';
 
-import './app.css';
+import './App.css';
 
 class App extends React.Component {
   constructor(props) {

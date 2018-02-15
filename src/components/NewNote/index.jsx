@@ -1,11 +1,11 @@
 import { PropTypes } from 'prop-types';
 import React from 'react';
 
-import Button from '../button/button';
-import MaterialIcon from '../material-icon/material-icon';
+import Button from '../Button';
+import MaterialIcon from '../MaterialIcon';
 
-import './new-note.css';
-import RemainingCharacters from '../remaining-characters/remaining-characters';
+import './NewNote.css';
+import RemainingCharacters from '../RemainingCharacters';
 
 class NewNote extends React.Component {
   constructor(props) {

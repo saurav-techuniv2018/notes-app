@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './about-us.css';
+import './AboutUs.css';
 
 const AboutUs = () => (
   <footer>
