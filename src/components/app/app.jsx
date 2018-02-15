@@ -18,6 +18,7 @@ const App = () =>
           noteTitlePlaceholder="Tasks for today"
           newNoteIcon="&#xE14F;"
           charactersLimit={10}
+          noteHint="Please type your note below"
         />
       </main>
       <AboutUs />

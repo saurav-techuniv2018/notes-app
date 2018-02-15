@@ -1,6 +1,7 @@
 import { PropTypes } from 'prop-types';
 import React from 'react';
 
+import Button from '../button/button';
 import MaterialIcon from '../material-icon/material-icon';
 
 import './new-note.css';
@@ -15,6 +16,7 @@ class NewNote extends React.Component {
       noteTitlePlaceholder: PropTypes.string.isRequired,
       newNoteIcon: PropTypes.string.isRequired,
       charactersLimit: PropTypes.string.isRequired,
+      noteHint: PropTypes.string.isRequired,
     };
 
     this.state = {
@@ -38,7 +40,10 @@ class NewNote extends React.Component {
       <article>
         <section id="new-note-heading">
           <h2 id="new-note-title">{this.props.title}</h2>
-          <button id="language">en</button>
+          <Button
+            id="language"
+            label="en"
+          />
         </section>
 
         <input
@@ -48,7 +53,7 @@ class NewNote extends React.Component {
         />
 
         <section className="note-heading">
-          <h3>Please type your note below</h3>
+          <h3>{this.props.noteHint}</h3>
           <MaterialIcon icon={this.props.newNoteIcon} />
         </section>
 
@@ -60,7 +65,7 @@ class NewNote extends React.Component {
           onChange={e => this.onNoteTextChanged(e)}
         />
         <section className="action-section">
-          <button id="save-button">Save</button>
+          <Button label="Save" />
           <RemainingCharacters
             count={this.state.charactersLimit - this.state.note.length}
             itemLabel="characters"
