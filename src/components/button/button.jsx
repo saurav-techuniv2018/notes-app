@@ -7,15 +7,22 @@ class Button extends React.Component {
 
     Button.propTypes = {
       label: PropTypes.string,
+      onClick: PropTypes.func,
     };
 
     Button.defaultProps = {
       label: '',
+      onClick: () => { },
     };
   }
 
   render = () => (
-    <button id="save-button">{this.props.label}</button>
+    <button
+      id="save-button"
+      onClick={args => this.props.onClick(args)}
+    >
+      {this.props.label}
+    </button>
   );
 }
 

@@ -6,8 +6,28 @@ import AboutUs from '../about-us/about-us';
 
 import './app.css';
 
-const App = () =>
-  (
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      notes: [],
+    };
+  }
+
+  saveNewNote = (note) => {
+    this.setState((previousState) => {
+      const previousNotes = previousState.notes;
+
+      previousNotes.push(note);
+
+      return {
+        notes: previousNotes,
+      };
+    });
+  }
+
+  render = () => (
     <div className="App">
       <header>
         <Title value="Start taking notes" />
@@ -19,10 +39,12 @@ const App = () =>
           newNoteIcon="&#xE14F;"
           charactersLimit={120}
           noteHint="Please type your note below"
+          onSave={note => this.saveNewNote(note)}
         />
       </main>
       <AboutUs />
     </div>
   );
+}
 
 export default App;

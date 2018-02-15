@@ -17,22 +17,15 @@ class NewNote extends React.Component {
       newNoteIcon: PropTypes.string.isRequired,
       charactersLimit: PropTypes.string.isRequired,
       noteHint: PropTypes.string.isRequired,
+      onSave: PropTypes.func.isRequired,
     };
 
     this.state = {
       note: '',
+      noteTitle: '',
       limitReaching: false,
       charactersLimit: this.props.charactersLimit,
     };
-  }
-
-  onNoteTextChanged(e) {
-    const newNote = e.target.value;
-
-    this.setState({
-      note: newNote,
-      limitReaching: newNote.length >= this.state.charactersLimit,
-    });
   }
 
   render() {
@@ -50,6 +43,14 @@ class NewNote extends React.Component {
           type="text"
           id="note-title-input"
           placeholder={this.props.noteTitlePlaceholder}
+          value={this.state.noteTitle}
+          onChange={(e) => {
+            const newTitle = e.target.value;
+
+            this.setState({
+              noteTitle: newTitle,
+            });
+          }}
         />
 
         <section className="note-heading">
@@ -59,13 +60,33 @@ class NewNote extends React.Component {
 
         <textarea
           id="notes"
-          value={this.note}
+          value={this.state.note}
           maxLength={this.state.charactersLimit}
           className={this.state.limitReaching ? 'textarea-warning' : ''}
-          onChange={e => this.onNoteTextChanged(e)}
+          onChange={(e) => {
+            const newNote = e.target.value;
+
+            this.setState({
+              note: newNote,
+              limitReaching: newNote.length >= this.state.charactersLimit,
+            });
+          }}
         />
         <section className="action-section">
-          <Button label="Save" />
+          <Button
+            label="Save"
+            onClick={() => {
+              this.props.onSave({
+                title: this.state.noteTitle,
+                note: this.state.note,
+              });
+              this.setState({
+                noteTitle: '',
+                note: '',
+                limitReaching: false,
+              });
+            }}
+          />
           <RemainingCharacters
             count={this.state.charactersLimit - this.state.note.length}
             itemLabel="characters"
