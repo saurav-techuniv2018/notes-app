@@ -1,11 +1,7 @@
 /* Full Height */
 
-html {
-  height: 100vh;
-}
-
 #root {
-  height: 100%;
+  height: 100vh;
 }
 
 body {
@@ -15,20 +11,20 @@ body {
 
 /* Flex Layout */
 
-.App {
+.App-container {
   height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-main {
+.App-main {
   flex-grow: 1;
-  background-color:#E9E9EF;
+  background-color: #E9E9EF;
   display: flex;
 }
 
 /* Margins */
 
-header, main {
+.App-header, .App-main {
   padding: 8px;
 }

@@ -28,11 +28,11 @@ class App extends React.Component {
   }
 
   render = () => (
-    <div className="App">
-      <header>
+    <div className="App-container">
+      <header className="App-header">
         <Title value="Start taking notes" />
       </header>
-      <main >
+      <main className="App-main">
         <NewNote
           title="Note Title"
           noteTitlePlaceholder="Tasks for today"
