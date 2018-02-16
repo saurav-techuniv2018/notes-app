@@ -7,13 +7,13 @@ import Footer from '../Footer';
 
 import { noteShape } from '../../models/note';
 
-import './CreateNewNotePage.css';
+import './NotePage.css';
 
-class CreateNewNotePage extends React.Component {
+class NotePage extends React.Component {
   constructor(props) {
     super(props);
 
-    CreateNewNotePage.propTypes = {
+    NotePage.propTypes = {
       notes: PropTypes.arrayOf(PropTypes.shape(noteShape)).isRequired,
       switchPage: PropTypes.func.isRequired,
     };
@@ -28,11 +28,11 @@ class CreateNewNotePage extends React.Component {
 
 
   render = () => (
-    <div className="CreateNewNotePage-container">
-      <header className="CreateNewNotePage-header">
+    <div className="NotePage-container">
+      <header className="NotePage-header">
         <Title value="Start taking notes" />
       </header>
-      <main className="CreateNewNotePage-main">
+      <main className="NotePage-main">
         <NewNote
           title="Note Title"
           noteTitlePlaceholder="Tasks for today"
@@ -50,4 +50,4 @@ class CreateNewNotePage extends React.Component {
   );
 }
 
-export default CreateNewNotePage;
+export default NotePage;

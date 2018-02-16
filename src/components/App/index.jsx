@@ -1,6 +1,6 @@
 import React from 'react';
 
-import CreateNewNotePage from '../CreateNewNotePage';
+import NotePage from '../NotePage';
 import AllNotes from '../AllNotes';
 
 import './App.css';
@@ -30,7 +30,7 @@ class App extends React.Component {
 
   render = () => (
     this.state.currentPage % this.state.pagesCount === 0 ?
-      <CreateNewNotePage
+      <NotePage
         notes={this.state.notes}
         switchPage={() => this.switchPage()}
       /> :
