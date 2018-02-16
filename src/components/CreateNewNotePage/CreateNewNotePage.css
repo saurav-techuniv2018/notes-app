@@ -1,0 +1,20 @@
+
+/* Flex Layout */
+
+.CreateNewNotePage-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.CreateNewNotePage-main {
+  flex-grow: 1;
+  background-color: #E9E9EF;
+  display: flex;
+}
+
+/* Margins */
+
+.CreateNewNotePage-header, .CreateNewNotePage-main {
+  padding: 8px;
+}

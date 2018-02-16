@@ -1,8 +1,7 @@
 import React from 'react';
 
-import Title from '../Title';
-import NewNote from '../NewNote';
-import AboutUs from '../AboutUs';
+import CreateNewNotePage from '../CreateNewNotePage';
+import AllNotes from '../AllNotes';
 
 import './App.css';
 
@@ -10,41 +9,35 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    // Pages
+    // NewNote: 0
+    // AllNotes: 1
+
     this.state = {
       notes: [],
+      currentPage: 0,
+      pagesCount: 2,
     };
   }
 
-  saveNewNote = (note) => {
-    this.setState((previousState) => {
-      const previousNotes = previousState.notes;
-
-      previousNotes.push(note);
-
-      return {
-        notes: previousNotes,
-      };
+  switchPage() {
+    this.setState((prevState) => {
+      const nextPage = (prevState.currentPage + 1) % prevState.pagesCount;
+      return { currentPage: nextPage };
     });
   }
 
 
   render = () => (
-    <div className="App-container">
-      <header className="App-header">
-        <Title value="Start taking notes" />
-      </header>
-      <main className="App-main">
-        <NewNote
-          title="Note Title"
-          noteTitlePlaceholder="Tasks for today"
-          newNoteIcon="&#xE14F;"
-          charactersLimit={120}
-          noteHint="Please type your note below"
-          onSave={note => this.saveNewNote(note)}
-        />
-      </main>
-      <AboutUs />
-    </div>
+    this.state.currentPage % this.state.pagesCount === 0 ?
+      <CreateNewNotePage
+        notes={this.state.notes}
+        switchPage={() => this.switchPage()}
+      /> :
+      <AllNotes
+        notes={this.state.notes}
+        switchPage={() => this.switchPage()}
+      />
   );
 }
 
