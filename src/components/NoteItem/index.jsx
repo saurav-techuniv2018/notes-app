@@ -1,6 +1,8 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
+import './NewItem.css';
+
 class NoteItem extends React.Component {
   constructor(props) {
     super(props);
@@ -13,8 +15,8 @@ class NoteItem extends React.Component {
 
   render = () => (
     <div className="NoteItem-container">
-      <h4 className="NoteItem-title">{this.props.title}</h4>
-      <p className="NoteItem-note">{this.props.note}</p>
+      <h3 className="NoteItem-title">{this.props.title}</h3>
+      <pre className="NoteItem-note">{this.props.note}</pre>
     </div>
   );
 }
