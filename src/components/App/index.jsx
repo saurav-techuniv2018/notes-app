@@ -16,13 +16,6 @@ class App extends React.Component {
   }
 
   saveNewNote = (note) => {
-    if (
-      !note ||
-      !note.title ||
-      !note.note ||
-      note.title === '' ||
-      note.note === '') { return; }
-
     this.setState((previousState) => {
       const previousNotes = previousState.notes;
 

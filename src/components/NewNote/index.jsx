@@ -73,6 +73,12 @@ class NewNote extends React.Component {
             className="NewNote-button"
             label="Save"
             onClick={() => {
+              if (
+                this.state.noteTitle === '' ||
+                this.state.note === '') {
+                return;
+              }
+
               this.props.onSave({
                 title: this.state.noteTitle,
                 note: this.state.note,
