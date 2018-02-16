@@ -3,7 +3,7 @@ import React from 'react';
 
 import Title from '../Title';
 import NewNote from '../NewNote';
-import AboutUs from '../AboutUs';
+import Footer from '../Footer';
 
 import './CreateNewNotePage.css';
 
@@ -43,7 +43,10 @@ class CreateNewNotePage extends React.Component {
           onSave={note => this.saveNewNote(note)}
         />
       </main>
-      <AboutUs />
+      <Footer
+        label="About Us"
+        onClick={() => { }}
+      />
     </div>
   );
 }

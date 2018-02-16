@@ -1,8 +1,8 @@
-.AboutUs-container {
+.Footer-container {
   display: flex;
 }
 
-.AboutUs-button {
+.Footer-button {
   text-align: center;
   flex-grow: 1;
   font-size: 1em;

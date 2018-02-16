@@ -1,7 +1,11 @@
 import { PropTypes } from 'prop-types';
 import React from 'react';
 
+import Footer from '../Footer';
 import NoteItem from '../NoteItem';
+import Title from '../Title';
+
+import './AllNotes.css';
 
 class AllNotes extends React.Component {
   constructor(props) {
@@ -12,6 +16,7 @@ class AllNotes extends React.Component {
         note: PropTypes.string,
         title: PropTypes.string,
       }).isRequired,
+      switchPage: PropTypes.func.isRequired,
     };
   }
 
@@ -26,9 +31,18 @@ class AllNotes extends React.Component {
   }, []);
 
   render = () => (
-    <ol className="AllNotes-container">
-      {this.renderNotes()}
-    </ol>
+    <div className="AllNotes-container">
+      <div className="AllNotes-header">
+        <Title value="Saved Notes" />
+      </div>
+      <div className="AllNotes-main">
+        {this.renderNotes()}
+      </div>
+      <Footer
+        label="Create New Note"
+        onClick={() => this.props.switchPage()}
+      />
+    </div>
   );
 }
 
