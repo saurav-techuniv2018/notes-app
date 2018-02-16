@@ -5,6 +5,8 @@ import Footer from '../Footer';
 import NoteItem from '../NoteItem';
 import Title from '../Title';
 
+import { noteShape } from '../../models/note';
+
 import './AllNotes.css';
 
 class AllNotes extends React.Component {
@@ -12,10 +14,7 @@ class AllNotes extends React.Component {
     super(props);
 
     AllNotes.propTypes = {
-      notes: PropTypes.arrayOf({
-        note: PropTypes.string,
-        title: PropTypes.string,
-      }).isRequired,
+      notes: PropTypes.arrayOf(PropTypes.shape(noteShape)).isRequired,
       switchPage: PropTypes.func.isRequired,
     };
   }
@@ -23,7 +22,7 @@ class AllNotes extends React.Component {
   renderNotes = () => this.props.notes.reduce((accumulator, note) => {
     const notes = accumulator;
     notes.push(<NoteItem
-      key={new Date()}
+      key={note.id}
       note={note.note}
       title={note.title}
     />);

@@ -3,9 +3,11 @@ import React from 'react';
 
 import Button from '../Button';
 import MaterialIcon from '../MaterialIcon';
+import RemainingCharacters from '../RemainingCharacters';
+
+import { Note } from '../../models/note';
 
 import './NewNote.css';
-import RemainingCharacters from '../RemainingCharacters';
 
 class NewNote extends React.Component {
   constructor(props) {
@@ -15,7 +17,7 @@ class NewNote extends React.Component {
       title: PropTypes.string.isRequired,
       noteTitlePlaceholder: PropTypes.string.isRequired,
       newNoteIcon: PropTypes.string.isRequired,
-      charactersLimit: PropTypes.string.isRequired,
+      charactersLimit: PropTypes.number.isRequired,
       noteHint: PropTypes.string.isRequired,
       onSave: PropTypes.func.isRequired,
     };
@@ -79,10 +81,7 @@ class NewNote extends React.Component {
                 return;
               }
 
-              this.props.onSave({
-                title: this.state.noteTitle,
-                note: this.state.note,
-              });
+              this.props.onSave(new Note(this.state.noteTitle, this.state.note));
               this.setState({
                 noteTitle: '',
                 note: '',

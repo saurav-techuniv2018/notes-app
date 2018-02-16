@@ -5,6 +5,8 @@ import Title from '../Title';
 import NewNote from '../NewNote';
 import Footer from '../Footer';
 
+import { noteShape } from '../../models/note';
+
 import './CreateNewNotePage.css';
 
 class CreateNewNotePage extends React.Component {
@@ -12,10 +14,7 @@ class CreateNewNotePage extends React.Component {
     super(props);
 
     CreateNewNotePage.propTypes = {
-      notes: PropTypes.arrayOf({
-        note: PropTypes.string,
-        title: PropTypes.string,
-      }).isRequired,
+      notes: PropTypes.arrayOf(PropTypes.shape(noteShape)).isRequired,
       switchPage: PropTypes.func.isRequired,
     };
   }
