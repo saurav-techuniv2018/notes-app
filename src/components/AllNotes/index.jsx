@@ -21,11 +21,15 @@ class AllNotes extends React.Component {
 
   renderNotes = () => this.props.notes.reduce((accumulator, note) => {
     const notes = accumulator;
-    notes.push(<NoteItem
-      key={note.id}
-      note={note.note}
-      title={note.title}
-    />);
+    notes.push((
+      <div key={note.id}>
+        <NoteItem
+          note={note.note}
+          title={note.title}
+          onEdit={() => this.props.switchPage(2, note)}
+        />
+      </div>
+    ));
     return notes;
   }, []);
 
@@ -39,7 +43,7 @@ class AllNotes extends React.Component {
       </div>
       <Footer
         label="Create New Note"
-        onClick={() => this.props.switchPage()}
+        onClick={() => this.props.switchPage(0)}
       />
     </div>
   );

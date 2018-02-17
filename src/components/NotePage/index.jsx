@@ -5,7 +5,7 @@ import Title from '../Title';
 import NewNote from '../NewNote';
 import Footer from '../Footer';
 
-import { noteShape } from '../../models/note';
+import { noteShape, Note } from '../../models/note';
 
 import './NotePage.css';
 
@@ -15,15 +15,26 @@ class NotePage extends React.Component {
 
     NotePage.propTypes = {
       notes: PropTypes.arrayOf(PropTypes.shape(noteShape)).isRequired,
+      currentNote: PropTypes.shape(noteShape).isRequired,
       switchPage: PropTypes.func.isRequired,
     };
   }
 
-  saveNewNote = (note) => {
+  saveNewNote = (newNote) => {
     const prevNotes = this.props.notes;
-    prevNotes.push(note);
 
-    this.props.switchPage();
+    if (!newNote.id) {
+      // New Note
+      prevNotes.push(new Note(newNote.title, newNote.note));
+    } else {
+      // Edit note
+      const noteToEdit = prevNotes.find(note => note.id === newNote.id);
+      if (noteToEdit) {
+        noteToEdit.title = newNote.title;
+        noteToEdit.note = newNote.note;
+      }
+    }
+    this.props.switchPage(1);
   }
 
 
@@ -38,6 +49,7 @@ class NotePage extends React.Component {
           noteTitlePlaceholder="Tasks for today"
           newNoteIcon="&#xE14F;"
           charactersLimit={120}
+          note={this.props.currentNote}
           noteHint="Please type your note below"
           onSave={note => this.saveNewNote(note)}
         />

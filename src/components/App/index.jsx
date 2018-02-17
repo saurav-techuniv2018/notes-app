@@ -12,32 +12,72 @@ class App extends React.Component {
     // Pages
     // NewNote: 0
     // AllNotes: 1
+    // EditNote: 2
 
     this.state = {
       notes: [],
       currentPage: 0,
-      pagesCount: 2,
+      currentNote: {
+        title: '',
+        note: '',
+      },
     };
   }
 
-  switchPage() {
-    this.setState((prevState) => {
-      const nextPage = (prevState.currentPage + 1) % prevState.pagesCount;
-      return { currentPage: nextPage };
-    });
+  switchPage = (page, currentNote) => {
+    if (currentNote) {
+      this.setState(prevState => ({
+        ...prevState,
+        currentNote,
+      }), () => {
+        this.setState(prevState => ({
+          ...prevState,
+          currentPage: page,
+        }));
+      });
+    } else {
+      this.setState(prevState => ({
+        ...prevState,
+        currentPage: page,
+      }));
+    }
   }
 
+  renderCurrentPage() {
+    switch (this.state.currentPage) {
+      case 0:
+        return (
+          <NotePage
+            notes={this.state.notes}
+            currentNote={{
+              title: '',
+              note: '',
+            }}
+            switchPage={this.switchPage}
+          />
+        );
+
+      case 1:
+        return (
+          <AllNotes
+            notes={this.state.notes}
+            switchPage={this.switchPage}
+          />
+        );
+
+      default:
+        return (
+          <NotePage
+            notes={this.state.notes}
+            currentNote={this.state.currentNote}
+            switchPage={this.switchPage}
+          />
+        );
+    }
+  }
 
   render = () => (
-    this.state.currentPage % this.state.pagesCount === 0 ?
-      <NotePage
-        notes={this.state.notes}
-        switchPage={() => this.switchPage()}
-      /> :
-      <AllNotes
-        notes={this.state.notes}
-        switchPage={() => this.switchPage()}
-      />
+    this.renderCurrentPage()
   );
 }
 

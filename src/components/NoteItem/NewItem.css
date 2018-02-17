@@ -3,9 +3,16 @@
   flex-direction: column;
 }
 
-.NoteItem-title {
+.NoteItem-title-container {
+  display: flex;
   margin: 8px;
   margin-left: 0;
+}
+
+.NoteItem-title {
+  flex-grow: 1;
+  display: inline-block;
+  margin: 0;
 }
 
 .NoteItem-note {

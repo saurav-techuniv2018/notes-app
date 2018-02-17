@@ -5,7 +5,7 @@ import Button from '../Button';
 import MaterialIcon from '../MaterialIcon';
 import RemainingCharacters from '../RemainingCharacters';
 
-import { Note } from '../../models/note';
+import { noteShape } from '../../models/note';
 
 import './NewNote.css';
 
@@ -20,13 +20,14 @@ class NewNote extends React.Component {
       charactersLimit: PropTypes.number.isRequired,
       noteHint: PropTypes.string.isRequired,
       onSave: PropTypes.func.isRequired,
+      note: PropTypes.shape(noteShape).isRequired,
     };
 
     this.state = {
-      note: '',
-      noteTitle: '',
       limitReaching: false,
       charactersLimit: this.props.charactersLimit,
+      note: this.props.note.note,
+      noteTitle: this.props.note.title,
     };
   }
 
@@ -47,10 +48,10 @@ class NewNote extends React.Component {
           value={this.state.noteTitle}
           onChange={(e) => {
             const newTitle = e.target.value;
-
-            this.setState({
-              noteTitle: newTitle,
-            });
+            this.setState(prevState => ({
+              ...prevState,
+                noteTitle: newTitle,
+            }));
           }}
         />
         <section className="NewNote-note-heading">
@@ -64,10 +65,11 @@ class NewNote extends React.Component {
           onChange={(e) => {
             const newNote = e.target.value;
 
-            this.setState({
+            this.setState(prevState => ({
+              ...prevState,
               note: newNote,
               limitReaching: newNote.length >= this.state.charactersLimit,
-            });
+            }));
           }}
         />
         <section className="NewNote-action-section">
@@ -76,15 +78,17 @@ class NewNote extends React.Component {
             label="Save"
             onClick={() => {
               if (
-                this.state.noteTitle === '' ||
-                this.state.note === '') {
+                this.state.note === '' ||
+                this.state.noteTitle === '') {
                 return;
               }
 
-              this.props.onSave(new Note(this.state.noteTitle, this.state.note));
+              this.props.onSave({
+                id: this.props.note.id,
+                title: this.state.noteTitle,
+                note: this.state.note,
+              });
               this.setState({
-                noteTitle: '',
-                note: '',
                 limitReaching: false,
               });
             }}
