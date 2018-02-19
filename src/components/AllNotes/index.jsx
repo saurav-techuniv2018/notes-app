@@ -7,12 +7,17 @@ import NoteItem from '../NoteItem';
 import Title from '../Title';
 
 import { noteShape } from '../../models/note';
+import { switchPage as test } from '../../redux/actions';
 
 import './AllNotes.css';
 
 class AllNotes extends React.Component {
   static mapStateToProps = state => ({
     notes: [...state.notes.allNotes],
+  });
+
+  static mapDispatchToProps = dispatch => ({
+    switchPage: () => { dispatch(test(0, undefined)); },
   });
 
   constructor(props) {
@@ -52,4 +57,4 @@ class AllNotes extends React.Component {
   );
 }
 
-export default connect(AllNotes.mapStateToProps, null)(AllNotes);
+export default connect(AllNotes.mapStateToProps, AllNotes.mapDispatchToProps)(AllNotes);

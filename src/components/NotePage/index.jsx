@@ -24,7 +24,7 @@ class NotePage extends React.Component {
     super(props);
 
     NotePage.propTypes = {
-      currentNote: PropTypes.shape(noteShape).isRequired,
+      note: PropTypes.shape(noteShape).isRequired,
       onSave: PropTypes.func.isRequired,
     };
   }
@@ -40,7 +40,7 @@ class NotePage extends React.Component {
           noteTitlePlaceholder="Tasks for today"
           newNoteIcon="&#xE14F;"
           charactersLimit={120}
-          note={this.props.currentNote}
+          note={this.props.note}
           noteHint="Please type your note below"
           onSave={note => this.props.onSave(note)}
         />

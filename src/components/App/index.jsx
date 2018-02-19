@@ -35,7 +35,6 @@ class App extends React.Component {
         note: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
       }).isRequired,
-      switchPage: PropTypes.func.isRequired,
     };
   }
 
@@ -43,28 +42,21 @@ class App extends React.Component {
     switch (this.props.currentPage) {
       case 0:
         return (
-          <NotePage
-            currentNote={{
-              title: '',
-              note: '',
-            }}
-            switchPage={() => this.props.switchPage(1, undefined)}
+          <NotePage note={{
+            title: '',
+            note: '',
+          }}
           />
         );
 
       case 1:
         return (
-          <AllNotes
-            switchPage={() => this.props.switchPage(0, this.props.currentNote)}
-          />
+          <AllNotes />
         );
 
       default:
         return (
-          <NotePage
-            currentNote={this.props.currentNote}
-            switchPage={() => this.props.switchPage(1, undefined)}
-          />
+          <NotePage note={this.props.currentNote} />
         );
     }
   }
