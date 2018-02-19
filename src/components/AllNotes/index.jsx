@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Footer from '../Footer';
 import NoteItem from '../NoteItem';
 import Title from '../Title';
+import Sync from '../Sync';
 
 import { noteShape } from '../../models/note';
 import { switchPage as test } from '../../redux/actions';
@@ -45,6 +46,7 @@ class AllNotes extends React.Component {
     <div className="AllNotes-container">
       <div className="AllNotes-header">
         <Title value="Saved Notes" />
+        <Sync />
       </div>
       <div className="AllNotes-main">
         {this.renderNotes()}
