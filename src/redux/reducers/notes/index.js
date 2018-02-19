@@ -1,4 +1,4 @@
-import { ADD_OR_EDIT_NOTE } from '../../actions/notes';
+import { ADD_OR_EDIT_NOTE, PUT_NOTES } from '../../actions/notes';
 
 import addOrEditNote from './add-edit-note';
 
@@ -11,8 +11,13 @@ const notes = (currentState = defaultState, action) => {
     case ADD_OR_EDIT_NOTE:
       return addOrEditNote(currentState, action.payload);
 
-    default:
-      return currentState;
+    case PUT_NOTES:
+      return {
+        ...currentState,
+        allNotes: [...action.payload],
+      };
+
+    default: return currentState;
   }
 };
 

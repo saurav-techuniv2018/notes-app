@@ -8,7 +8,7 @@ import Title from '../Title';
 import Sync from '../Sync';
 
 import { noteShape } from '../../models/note';
-import { switchPage as test } from '../../redux/actions';
+import { switchPage } from '../../redux/actions';
 
 import './AllNotes.css';
 
@@ -18,7 +18,7 @@ class AllNotes extends React.Component {
   });
 
   static mapDispatchToProps = dispatch => ({
-    switchPage: () => { dispatch(test(0, undefined)); },
+    switchPage: () => { dispatch(switchPage(0, undefined)); },
   });
 
   constructor(props) {

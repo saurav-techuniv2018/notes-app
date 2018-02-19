@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 
 import NotePage from '../NotePage';
 import AllNotes from '../AllNotes';
-import { currentNote, switchPage } from '../../redux/actions';
+import actionGenerator, { switchPage, currentNote, putNotes } from '../../redux/actions';
+import { SYNC_DATA_STARTED, SYNC_DATA_SUCCEEDED, SYNC_DATA_FAILED } from '../../redux/actions/app';
 
 import './App.css';
 
@@ -19,6 +20,10 @@ class App extends React.Component {
   static mapDispatchToProps = dispatch => ({
     setCurrentNote: (note) => { dispatch(currentNote(note)); },
     switchPage: (page, note) => { dispatch(switchPage(page, note)); },
+    fetchNotesStarted: () => { dispatch(actionGenerator(SYNC_DATA_STARTED)); },
+    fetchNotesSucceeded: () => { dispatch(actionGenerator(SYNC_DATA_SUCCEEDED)); },
+    fetchNotesFailed: () => { dispatch(actionGenerator(SYNC_DATA_FAILED)); },
+    putNotes: notes => dispatch(putNotes(notes)),
   });
 
   constructor(props) {
@@ -35,7 +40,27 @@ class App extends React.Component {
         note: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
       }).isRequired,
+      fetchNotesStarted: PropTypes.func.isRequired,
+      fetchNotesSucceeded: PropTypes.func.isRequired,
+      fetchNotesFailed: PropTypes.func.isRequired,
+      putNotes: PropTypes.func.isRequired,
     };
+  }
+
+  componentDidMount() {
+    this.props.fetchNotesStarted();
+    fetch('/api/notes')
+      .then(response => response.json())
+      .then((payload) => {
+        console.log('done');
+        // TODO Check result status
+        const notes = payload.data;
+        this.props.putNotes(notes);
+        this.props.fetchNotesSucceeded();
+      })
+      .catch(() => {
+        this.props.fetchNotesFailed();
+      });
   }
 
   renderCurrentPage() {
