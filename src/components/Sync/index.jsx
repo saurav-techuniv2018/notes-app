@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 
-import actionGenerator, { putNotes } from '../../redux/actions';
-import { SYNC_DATA_STARTED, SYNC_DATA_SUCCEEDED, SYNC_DATA_FAILED } from '../../redux/actions/app';
+import { putNotes } from '../../redux/actions';
 
 import MaterialIcon from '../MaterialIcon';
 import { getNotes, setNotes } from '../../lib/sync-notes';
@@ -53,6 +52,9 @@ class Sync extends React.Component {
       <MaterialIcon
         icon="&#xE627;"
         onClick={() => this.syncNotes()}
+        style={{
+          cursor: 'pointer',
+        }}
       />
     </div>
   );
