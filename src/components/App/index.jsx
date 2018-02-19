@@ -1,11 +1,26 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
+import { connect } from 'react-redux';
 
 import NotePage from '../NotePage';
 import AllNotes from '../AllNotes';
+import { currentNote, switchPage } from '../../redux/actions';
 
 import './App.css';
 
 class App extends React.Component {
+  static mapStateToProps = state => ({
+    currentPage: state.app.currentPage,
+    currentNote: {
+      ...state.app.currentNote,
+    },
+  });
+
+  static mapDispatchToProps = dispatch => ({
+    setCurrentNote: (note) => { dispatch(currentNote(note)); },
+    switchPage: (page, note) => { dispatch(switchPage(page, note)); },
+  });
+
   constructor(props) {
     super(props);
 
@@ -14,63 +29,41 @@ class App extends React.Component {
     // AllNotes: 1
     // EditNote: 2
 
-    this.state = {
-      notes: [],
-      currentPage: 0,
-      currentNote: {
-        title: '',
-        note: '',
-      },
+    App.propTypes = {
+      currentPage: PropTypes.number.isRequired,
+      currentNote: PropTypes.shape({
+        note: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+      }).isRequired,
+      switchPage: PropTypes.func.isRequired,
     };
   }
 
-  switchPage = (page, currentNote) => {
-    if (currentNote) {
-      this.setState(prevState => ({
-        ...prevState,
-        currentNote,
-      }), () => {
-        this.setState(prevState => ({
-          ...prevState,
-          currentPage: page,
-        }));
-      });
-    } else {
-      this.setState(prevState => ({
-        ...prevState,
-        currentPage: page,
-      }));
-    }
-  }
-
   renderCurrentPage() {
-    switch (this.state.currentPage) {
+    switch (this.props.currentPage) {
       case 0:
         return (
           <NotePage
-            notes={this.state.notes}
             currentNote={{
               title: '',
               note: '',
             }}
-            switchPage={this.switchPage}
+            switchPage={() => this.props.switchPage(1, undefined)}
           />
         );
 
       case 1:
         return (
           <AllNotes
-            notes={this.state.notes}
-            switchPage={this.switchPage}
+            switchPage={() => this.props.switchPage(0, this.props.currentNote)}
           />
         );
 
       default:
         return (
           <NotePage
-            notes={this.state.notes}
-            currentNote={this.state.currentNote}
-            switchPage={this.switchPage}
+            currentNote={this.props.currentNote}
+            switchPage={() => this.props.switchPage(1, undefined)}
           />
         );
     }
@@ -81,4 +74,4 @@ class App extends React.Component {
   );
 }
 
-export default App;
+export default connect(App.mapStateToProps, App.mapDispatchToProps)(App);

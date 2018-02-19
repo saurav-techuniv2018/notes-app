@@ -1,10 +1,10 @@
-const ADD_NOTE = 'ADD_NOTE';
+const ADD_OR_EDIT_NOTE = 'ADD_OR_EDIT_NOTE';
 
-export { ADD_NOTE };
+export { ADD_OR_EDIT_NOTE };
 
-const addNote = note => ({
-  type: ADD_NOTE,
+const addOrEditNote = note => ({
+  type: ADD_OR_EDIT_NOTE,
   payload: note,
 });
 
-export { addNote };
+export { addOrEditNote };

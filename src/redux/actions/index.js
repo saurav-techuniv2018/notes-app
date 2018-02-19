@@ -1,4 +1,4 @@
 import { currentNote, switchPage } from './app';
-import { addNote } from './notes';
+import { addOrEditNote } from './notes';
 
-export { switchPage, currentNote, addNote };
+export { switchPage, currentNote, addOrEditNote };

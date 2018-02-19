@@ -1,42 +1,33 @@
 import { PropTypes } from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { addOrEditNote, switchPage } from '../../redux/actions';
 
 import Title from '../Title';
 import NewNote from '../NewNote';
 import Footer from '../Footer';
 
-import { noteShape, Note } from '../../models/note';
+import { noteShape } from '../../models/note';
 
 import './NotePage.css';
 
 class NotePage extends React.Component {
+  static mapDispatchToProps = dispatch => ({
+    onSave: ((note) => {
+      dispatch(addOrEditNote(note));
+      dispatch(switchPage(1, undefined));
+    }),
+  });
+
   constructor(props) {
     super(props);
 
     NotePage.propTypes = {
-      notes: PropTypes.arrayOf(PropTypes.shape(noteShape)).isRequired,
       currentNote: PropTypes.shape(noteShape).isRequired,
-      switchPage: PropTypes.func.isRequired,
+      onSave: PropTypes.func.isRequired,
     };
   }
-
-  saveNewNote = (newNote) => {
-    const prevNotes = this.props.notes;
-
-    if (!newNote.id) {
-      // New Note
-      prevNotes.push(new Note(newNote.title, newNote.note));
-    } else {
-      // Edit note
-      const noteToEdit = prevNotes.find(note => note.id === newNote.id);
-      if (noteToEdit) {
-        noteToEdit.title = newNote.title;
-        noteToEdit.note = newNote.note;
-      }
-    }
-    this.props.switchPage(1);
-  }
-
 
   render = () => (
     <div className="NotePage-container">
@@ -51,7 +42,7 @@ class NotePage extends React.Component {
           charactersLimit={120}
           note={this.props.currentNote}
           noteHint="Please type your note below"
-          onSave={note => this.saveNewNote(note)}
+          onSave={note => this.props.onSave(note)}
         />
       </main>
       <Footer
@@ -62,4 +53,4 @@ class NotePage extends React.Component {
   );
 }
 
-export default NotePage;
+export default connect(null, NotePage.mapDispatchToProps)(NotePage);

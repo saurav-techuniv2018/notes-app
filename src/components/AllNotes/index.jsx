@@ -1,5 +1,6 @@
 import { PropTypes } from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 
 import Footer from '../Footer';
 import NoteItem from '../NoteItem';
@@ -10,6 +11,10 @@ import { noteShape } from '../../models/note';
 import './AllNotes.css';
 
 class AllNotes extends React.Component {
+  static mapStateToProps = state => ({
+    notes: [...state.notes.allNotes],
+  });
+
   constructor(props) {
     super(props);
 
@@ -24,9 +29,7 @@ class AllNotes extends React.Component {
     notes.push((
       <div key={note.id}>
         <NoteItem
-          note={note.note}
-          title={note.title}
-          onEdit={() => this.props.switchPage(2, note)}
+          note={note}
         />
       </div>
     ));
@@ -43,10 +46,10 @@ class AllNotes extends React.Component {
       </div>
       <Footer
         label="Create New Note"
-        onClick={() => this.props.switchPage(0)}
+        onClick={this.props.switchPage}
       />
     </div>
   );
 }
 
-export default AllNotes;
+export default connect(AllNotes.mapStateToProps, null)(AllNotes);

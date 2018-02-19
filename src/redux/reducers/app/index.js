@@ -1,4 +1,5 @@
-import { CURRENT_NOTE, SWITCH_PAGE } from '../actions/app';
+import { SWITCH_PAGE } from '../../actions/app';
+import switchPage from './switch-page';
 
 const defaultState = {
   currentPage: 0,
@@ -10,17 +11,8 @@ const defaultState = {
 
 const app = (currentState = defaultState, action) => {
   switch (action.type) {
-    case CURRENT_NOTE:
-      return {
-        ...currentState,
-        currentNote: action.payload,
-      };
-
     case SWITCH_PAGE:
-      return {
-        ...currentState,
-        currentPage: action.payload,
-      };
+      return switchPage(currentState, action.payload);
 
     default:
       return currentState;
