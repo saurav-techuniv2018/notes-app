@@ -4,7 +4,10 @@ const getNotes = () => new Promise((resolve, reject) => {
   fetch('/api/notes')
     .then(response => response.json())
     .then((payload) => {
-      resolve(payload.data);
+      resolve(payload.data.map(note => ({
+        ...note,
+        id: parseInt(note.id, 10),
+      })));
     })
     .catch(() => {
       reject(new Error('Could not retrieve notes.'));
@@ -22,7 +25,10 @@ const setNotes = notes => new Promise((resolve, reject) => {
   })
     .then(response => response.json())
     .then((payload) => {
-      resolve(payload.data);
+      resolve(payload.data.map(note => ({
+        ...note,
+        id: parseInt(note.id, 10),
+      })));
     })
     .catch(() => {
       reject(new Error('Could update notes in the database.'));
