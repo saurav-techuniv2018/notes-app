@@ -13,6 +13,10 @@
   display: flex;
 }
 
+.NotePage-header {
+  background-color: #B0B0E8;
+}
+
 /* Margins */
 
 .NotePage-header, .NotePage-main {

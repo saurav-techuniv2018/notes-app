@@ -10,6 +10,8 @@
 
 .NewNote-notes {
   flex-grow: 1;
+  margin-bottom: 8px;
+  font-size: 20px;
 }
 
 .NewNote-note-heading {

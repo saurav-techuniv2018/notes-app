@@ -12,6 +12,11 @@
   background-color: #E9E9EF;
   display: flex;
   flex-direction: column;
+  overflow: scroll;
+}
+
+.AllNotes-header {
+  background-color: #B0B0E8
 }
 
 /* Margins */
