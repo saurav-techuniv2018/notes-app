@@ -2,7 +2,8 @@
 
 const getNotes = () => new Promise((resolve, reject) => {
   fetch('/api/notes')
-    .then(response => response.json())
+    .then(response => response.text())
+    .then(json => JSON.parse(json))
     .then((payload) => {
       resolve(payload.data.map(note => ({
         ...note,
@@ -23,7 +24,8 @@ const setNotes = notes => new Promise((resolve, reject) => {
     method: 'PUT',
     body: requestPayload,
   })
-    .then(response => response.json())
+    .then(response => response.text())
+    .then(json => JSON.parse(json))
     .then((payload) => {
       resolve(payload.data.map(note => ({
         ...note,
