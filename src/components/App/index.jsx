@@ -1,9 +1,12 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter, Switch, Route } from 'react-router-dom';
 
 import NotePage from '../NotePage';
 import AllNotes from '../AllNotes';
+import Nav from '../Nav';
+
 import { getNotes, setNotes } from '../../lib/sync-notes';
 import actionGenerator, { switchPage, currentNote, putNotes } from '../../redux/actions';
 import { SYNC_DATA_STARTED, SYNC_DATA_SUCCEEDED, SYNC_DATA_FAILED } from '../../redux/actions/app';
@@ -103,8 +106,23 @@ class App extends React.Component {
   }
 
   render = () => (
-    this.renderCurrentPage()
+    <Switch>
+      <Route exact path="/" component={Nav} />
+      <Route
+        path="/new"
+        render={routeProps => (
+          <NotePage
+            {...routeProps}
+            note={{
+                title: '',
+                note: '',
+              }}
+          />
+          )}
+      />
+      <Route path="/all" component={AllNotes} />
+    </Switch>
   );
 }
 
-export default connect(App.mapStateToProps, App.mapDispatchToProps)(App);
+export default withRouter(connect(App.mapStateToProps, App.mapDispatchToProps)(App));
