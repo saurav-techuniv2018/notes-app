@@ -1,7 +1,7 @@
-import { currentNote, switchPage, syncData } from './app';
+import { setCurrentNote } from './app';
 import { addOrEditNote, putNotes } from './notes';
 
-export { switchPage, currentNote, addOrEditNote, syncData, putNotes };
+export { setCurrentNote, addOrEditNote, putNotes };
 
 const actionGenerator = actionTypeName => ({
   type: actionTypeName,

@@ -1,4 +1,4 @@
-import { SWITCH_PAGE, SYNC_DATA_STARTED, SYNC_DATA_SUCCEEDED } from '../../actions/app';
+import { SET_CURRENT_NOTE, SYNC_DATA_STARTED, SYNC_DATA_SUCCEEDED } from '../../actions/app';
 import switchPage from './switch-page';
 
 const defaultState = {
@@ -12,7 +12,7 @@ const defaultState = {
 
 const app = (currentState = defaultState, action) => {
   switch (action.type) {
-    case SWITCH_PAGE:
+    case SET_CURRENT_NOTE:
       return switchPage(currentState, action.payload);
 
     case SYNC_DATA_STARTED:

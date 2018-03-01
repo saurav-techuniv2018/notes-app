@@ -8,7 +8,6 @@ import Title from '../Title';
 import Sync from '../Sync';
 
 import { noteShape } from '../../models/note';
-import { switchPage } from '../../redux/actions';
 
 import './AllNotes.css';
 
@@ -17,8 +16,8 @@ class AllNotes extends React.Component {
     notes: [...state.notes.allNotes],
   });
 
-  static mapDispatchToProps = dispatch => ({
-    switchPage: () => { dispatch(switchPage(0, undefined)); },
+  static mapDispatchToProps = () => ({
+    switchPage: (ownProps) => { ownProps.history.push('/new'); },
   });
 
   constructor(props) {
@@ -53,7 +52,7 @@ class AllNotes extends React.Component {
       </div>
       <Footer
         label="Create New Note"
-        onClick={this.props.switchPage}
+        onClick={() => this.props.switchPage(this.props)}
       />
     </div>
   );

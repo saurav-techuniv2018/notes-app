@@ -8,7 +8,7 @@ import AllNotes from '../AllNotes';
 import Nav from '../Nav';
 
 import { getNotes, setNotes } from '../../lib/sync-notes';
-import actionGenerator, { switchPage, currentNote, putNotes } from '../../redux/actions';
+import actionGenerator, { setCurrentNote, putNotes } from '../../redux/actions';
 import { SYNC_DATA_STARTED, SYNC_DATA_SUCCEEDED, SYNC_DATA_FAILED } from '../../redux/actions/app';
 
 import './App.css';
@@ -16,7 +16,6 @@ import { noteShape } from '../../models/note';
 
 class App extends React.Component {
   static mapStateToProps = state => ({
-    currentPage: state.app.currentPage,
     currentNote: {
       ...state.app.currentNote,
     },
@@ -24,35 +23,12 @@ class App extends React.Component {
   });
 
   static mapDispatchToProps = dispatch => ({
-    setCurrentNote: (note) => { dispatch(currentNote(note)); },
-    switchPage: (page, note) => { dispatch(switchPage(page, note)); },
+    setCurrentNote: (note) => { dispatch(setCurrentNote(note)); },
     fetchNotesStarted: () => { dispatch(actionGenerator(SYNC_DATA_STARTED)); },
     fetchNotesSucceeded: () => { dispatch(actionGenerator(SYNC_DATA_SUCCEEDED)); },
     fetchNotesFailed: () => { dispatch(actionGenerator(SYNC_DATA_FAILED)); },
     putNotes: notes => dispatch(putNotes(notes)),
   });
-
-  constructor(props) {
-    super(props);
-
-    // Pages
-    // NewNote: 0
-    // AllNotes: 1
-    // EditNote: 2
-
-    App.propTypes = {
-      currentPage: PropTypes.number.isRequired,
-      currentNote: PropTypes.shape({
-        note: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-      }).isRequired,
-      fetchNotesStarted: PropTypes.func.isRequired,
-      fetchNotesSucceeded: PropTypes.func.isRequired,
-      fetchNotesFailed: PropTypes.func.isRequired,
-      putNotes: PropTypes.func.isRequired,
-      notes: PropTypes.arrayOf(PropTypes.shape(noteShape)).isRequired,
-    };
-  }
 
   componentDidMount() {
     this.syncNotes();
@@ -82,29 +58,6 @@ class App extends React.Component {
     }
   }
 
-  renderCurrentPage() {
-    switch (this.props.currentPage) {
-      case 0:
-        return (
-          <NotePage note={{
-            title: '',
-            note: '',
-          }}
-          />
-        );
-
-      case 1:
-        return (
-          <AllNotes />
-        );
-
-      default:
-        return (
-          <NotePage note={this.props.currentNote} />
-        );
-    }
-  }
-
   render = () => (
     <Switch>
       <Route exact path="/" component={Nav} />
@@ -114,15 +67,36 @@ class App extends React.Component {
           <NotePage
             {...routeProps}
             note={{
-                title: '',
-                note: '',
-              }}
+              title: '',
+              note: '',
+            }}
           />
-          )}
+        )}
+      />
+      <Route
+        path="/edit-note"
+        render={routeProps => (
+          <NotePage
+            {...routeProps}
+            note={this.props.currentNote}
+          />
+        )}
       />
       <Route path="/all" component={AllNotes} />
     </Switch>
   );
 }
+
+App.propTypes = {
+  currentNote: PropTypes.shape({
+    note: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+  }).isRequired,
+  fetchNotesStarted: PropTypes.func.isRequired,
+  fetchNotesSucceeded: PropTypes.func.isRequired,
+  fetchNotesFailed: PropTypes.func.isRequired,
+  putNotes: PropTypes.func.isRequired,
+  notes: PropTypes.arrayOf(PropTypes.shape(noteShape)).isRequired,
+};
 
 export default withRouter(connect(App.mapStateToProps, App.mapDispatchToProps)(App));

@@ -1,8 +1,9 @@
 import { PropTypes } from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-import { addOrEditNote, switchPage } from '../../redux/actions';
+import { addOrEditNote, setCurrentNote } from '../../redux/actions';
 
 import Title from '../Title';
 import NewNote from '../NewNote';
@@ -14,9 +15,10 @@ import './NotePage.css';
 
 class NotePage extends React.Component {
   static mapDispatchToProps = dispatch => ({
-    onSave: ((note) => {
+    onSave: ((note, ownProps) => {
       dispatch(addOrEditNote(note));
-      dispatch(switchPage(1, undefined));
+      dispatch(setCurrentNote(note));
+      ownProps.history.push('/all');
     }),
   });
 
@@ -42,7 +44,7 @@ class NotePage extends React.Component {
           charactersLimit={120}
           note={this.props.note}
           noteHint="Please type your note below"
-          onSave={note => this.props.onSave(note)}
+          onSave={note => this.props.onSave(note, this.props)}
         />
       </main>
       <Footer
@@ -53,4 +55,4 @@ class NotePage extends React.Component {
   );
 }
 
-export default connect(null, NotePage.mapDispatchToProps)(NotePage);
+export default withRouter(connect(null, NotePage.mapDispatchToProps)(NotePage));

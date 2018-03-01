@@ -5,6 +5,11 @@ export const container = {
   justifyContent: 'center',
 };
 
+export const header = {
+  fontFamily: '"Helvetica Neue", Georgia, "Times New Roman", Times, serif',
+  alignSelf: 'center',
+};
+
 export const link = {
   alignSelf: 'center',
   padding: '16px',
@@ -15,5 +20,6 @@ export const link = {
   textDecoration: 'none',
   width: '180px',
   textAlign: 'center',
+  cursor: 'pointer',
 };
 

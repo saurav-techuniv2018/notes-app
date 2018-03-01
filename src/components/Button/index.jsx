@@ -3,29 +3,26 @@ import React from 'react';
 
 import './Button.css';
 
-class Button extends React.Component {
-  constructor(props) {
-    super(props);
+const Button = props => (
+  <button
+    className="NewNote-button"
+    onClick={args => props.onClick(args)}
+    style={props.style}
+  >
+    {props.label}
+  </button>
+);
 
-    Button.propTypes = {
-      label: PropTypes.string,
-      onClick: PropTypes.func,
-    };
+Button.propTypes = {
+  label: PropTypes.string,
+  onClick: PropTypes.func,
+  style: PropTypes.object,
+};
 
-    Button.defaultProps = {
-      label: '',
-      onClick: () => { },
-    };
-  }
-
-  render = () => (
-    <button
-      className="NewNote-button"
-      onClick={args => this.props.onClick(args)}
-    >
-      {this.props.label}
-    </button>
-  );
-}
+Button.defaultProps = {
+  label: '',
+  onClick: () => { },
+  style: {},
+};
 
 export default Button;
