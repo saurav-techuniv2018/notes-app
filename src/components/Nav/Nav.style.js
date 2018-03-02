@@ -16,7 +16,7 @@ export const link = {
   backgroundColor: '#B0B0E8',
   margin: '16px',
   borderRadius: '4px',
-  boxShadow: '1px 1px 1px #000, 1px -1px 1px #000, -1px 1px 1px #000, -1px -1px 1px #000',
+  boxShadow: '-1px 1px 1px #000',
   textDecoration: 'none',
   width: '180px',
   textAlign: 'center',
